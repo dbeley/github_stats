@@ -42,28 +42,35 @@ def main():
         os.makedirs(directory)
 
     for repo_name in repos:
-        repo = g.get_repo(repo_name)
-        logger.debug(f"Repo : {repo}")
-        stargazers = repo.stargazers_count
-        logger.debug(f"Stars : {stargazers}")
-        forks = repo.forks_count
-        logger.debug(f"Forks : {forks}")
-        subscribers = repo.subscribers_count
-        logger.debug(f"Subscribers : {subscribers}")
-        contributors = repo.get_contributors().totalCount
-        logger.debug(f"Contributors : {contributors}")
+        try:
+            repo = g.get_repo(repo_name)
+            logger.debug(f"Repo : {repo}")
+            stargazers = repo.stargazers_count
+            logger.debug(f"Stars : {stargazers}")
+            forks = repo.forks_count
+            logger.debug(f"Forks : {forks}")
+            subscribers = repo.subscribers_count
+            logger.debug(f"Subscribers : {subscribers}")
+            try:
+                contributors = repo.get_contributors().totalCount
+                logger.debug(f"Contributors : {contributors}")
+            except Exception as e:
+                logger.error(e)
+                contributors = "NA"
 
-        if not os.path.isfile(f"{directory}/repos_stats.csv"):
+            if not os.path.isfile(f"{directory}/repos_stats.csv"):
+                with open(f"{directory}/repos_stats.csv", 'a+') as f:
+                    f.write(f"Repo,Date,Stars,Forks,Subscribers,Contributors\n")
+            if not os.path.isfile(f"{directory}/{repo_name.replace('/', '_')}_repo_stats.csv"):
+                with open(f"{directory}/{repo_name.replace('/', '_')}_repo_stats.csv", 'a+') as f:
+                    f.write(f"Repo,Date,Stars,Forks,Subscribers,Contributors\n")
+
             with open(f"{directory}/repos_stats.csv", 'a+') as f:
-                f.write(f"Repo,Date,Stars,Forks,Subscribers,Contributors\n")
-        if not os.path.isfile(f"{directory}/{repo_name.replace('/', '_')}_repo_stats.csv"):
+                f.write(f"{repo_name},{auj},{stargazers},{forks},{subscribers},{contributors}\n")
             with open(f"{directory}/{repo_name.replace('/', '_')}_repo_stats.csv", 'a+') as f:
-                f.write(f"Repo,Date,Stars,Forks,Subscribers,Contributors\n")
-
-        with open(f"{directory}/repos_stats.csv", 'a+') as f:
-            f.write(f"{repo_name},{auj},{stargazers},{forks},{subscribers},{contributors}\n")
-        with open(f"{directory}/{repo_name.replace('/', '_')}_repo_stats.csv", 'a+') as f:
-            f.write(f"{repo_name},{auj},{stargazers},{forks},{subscribers},{contributors}\n")
+                f.write(f"{repo_name},{auj},{stargazers},{forks},{subscribers},{contributors}\n")
+        except Exception as e:
+            logger.error(f"{repo_name} : {e}")
 
     logger.debug("Runtime : %.2f seconds" % (time.time() - temps_debut))
 
