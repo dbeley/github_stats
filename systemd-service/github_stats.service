@@ -1,0 +1,10 @@
+[Unit]
+Description=bot github
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/Documents/github_stats/
+ExecStart=/usr/bin/python /usr/bin/github_stats -f repos_list.txt
+
+[Install]
+WantedBy=multi-user.target
