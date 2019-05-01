@@ -7,7 +7,9 @@ WorkingDirectory=%h/Documents/github_stats/
 # Without virtualenv
 # ExecStart=/usr/bin/python /usr/bin/github_stats -f repos_list.txt
 # With virtualenv
-ExecStart=%h/Documents/github_stats/venv/bin/github_stats -f repos_list.txt
+# ExecStart=%h/Documents/github_stats/venv/bin/github_stats -f repos_list.txt
+# With pipenv
+ExecStart=/usr/bin/pipenv run github_stats -f repos_list.txt
 
 [Install]
 WantedBy=multi-user.target
