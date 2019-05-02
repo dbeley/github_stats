@@ -9,13 +9,13 @@ Extract statistics from github repos to a csv file
 ## Installation
 
 ```
-python setup.py install
+pipenv install '-e .'
 ```
 
 ## Help
 
 ```
-github_stats-h
+pipenv run github_stats -h
 ```
 
 ## Usage
@@ -30,7 +30,7 @@ tensorflow/tensorflow
 You can then call
 
 ```
-github_stats -f repos_list.txt
+pipenv run github_stats -f repos_list.txt
 ```
 
 ## Autostarting
