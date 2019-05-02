@@ -2,6 +2,7 @@ Exports/
 build/
 dist/
 *.egg-info/
+.venv/
 github_stats/__pycache__/
 config.ini
 *.txt

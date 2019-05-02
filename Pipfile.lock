@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "83b9501eb85c5ff117dff8d8be397dcfc8ca18068b854cf598ab9031f3410e8d"
+            "sha256": "b3b0eff735667b633b1668fdae8c193a2070b1979b3d13fbdb24ddc2c545a532"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -36,6 +36,10 @@
                 "sha256:749f6cdcfbdc3f79258f8154bad43fced95adc632c337675d0385959895894bc"
             ],
             "version": "==1.2.5"
+        },
+        "e1839a8": {
+            "editable": true,
+            "path": "."
         },
         "github-stats": {
             "editable": true,
@@ -77,6 +81,7 @@
         },
         "wrapt": {
             "hashes": [
+                "sha256:1c5f91c592027973b7ab8cfb632f5e87c9aeff68de40dd206ece9dbca65cf07f",
                 "sha256:4aea003270831cceb8a90ff27c4031da6ead7ec1886023b80ce0dfe0adf61533"
             ],
             "version": "==1.11.1"
