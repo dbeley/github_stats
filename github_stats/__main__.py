@@ -5,7 +5,7 @@ import datetime
 import configparser
 import pkg_resources
 import locale
-import os
+from pathlib import Path
 from github import Github
 
 logger = logging.getLogger()
@@ -37,9 +37,7 @@ def main():
 
     logger.debug("Check Exports Folder")
     directory = "Exports"
-    if not os.path.exists(directory):
-        logger.debug("Creating Exports Folder")
-        os.makedirs(directory)
+    Path(directory).mkdir(parents=True, exist_ok=True)
 
     for repo_name in repos:
         try:
@@ -58,10 +56,10 @@ def main():
                 logger.error(e)
                 contributors = "NA"
 
-            if not os.path.isfile(f"{directory}/repos_stats.csv"):
+            if not Path(f"{directory}/repos_stats.csv").is_file():
                 with open(f"{directory}/repos_stats.csv", 'a+') as f:
                     f.write(f"Repo,Date,Stars,Forks,Subscribers,Contributors\n")
-            if not os.path.isfile(f"{directory}/{repo_name.replace('/', '_')}_repo_stats.csv"):
+            if not Path(f"{directory}/{repo_name.replace('/', '_')}_repo_stats.csv").is_file():
                 with open(f"{directory}/{repo_name.replace('/', '_')}_repo_stats.csv", 'a+') as f:
                     f.write(f"Repo,Date,Stars,Forks,Subscribers,Contributors\n")
 
