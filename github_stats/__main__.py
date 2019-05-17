@@ -14,7 +14,6 @@ temps_debut = time.time()
 
 def main():
     args = parse_args()
-    file = args.file
     locale.setlocale(locale.LC_TIME, "fr_FR.utf-8")
     auj = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 
@@ -25,12 +24,12 @@ def main():
 
     g = Github(username, password)
 
-    if file is None:
+    if args.file is None:
         file = pkg_resources.resource_string(__name__, "repos_list.txt")
         repos = file.decode("utf-8").split('\n')
         repos = repos[:-1]
     else:
-        with open(file, 'r') as f:
+        with open(args.file, 'r') as f:
             repos = f.readlines()
         repos = [x.strip() for x in repos]
     logger.debug(repos)
@@ -42,16 +41,16 @@ def main():
     for repo_name in repos:
         try:
             repo = g.get_repo(repo_name)
-            logger.debug(f"Repo : {repo}")
+            logger.debug("Repo : %s", repo)
             stargazers = repo.stargazers_count
-            logger.debug(f"Stars : {stargazers}")
+            logger.debug("Stars : %s", stargazers)
             forks = repo.forks_count
-            logger.debug(f"Forks : {forks}")
+            logger.debug("Forks : %s", forks)
             subscribers = repo.subscribers_count
-            logger.debug(f"Subscribers : {subscribers}")
+            logger.debug("Subscribers : %s", subscribers)
             try:
                 contributors = repo.get_contributors().totalCount
-                logger.debug(f"Contributors : {contributors}")
+                logger.debug("Contributors : %s", contributors)
             except Exception as e:
                 logger.error(e)
                 contributors = "NA"
@@ -68,7 +67,7 @@ def main():
             with open(f"{directory}/{repo_name.replace('/', '_')}_repo_stats.csv", 'a+') as f:
                 f.write(f"{repo_name},{auj},{stargazers},{forks},{subscribers},{contributors}\n")
         except Exception as e:
-            logger.error(f"{repo_name} : {e}")
+            logger.error("%s : %s", repo_name, e)
 
     logger.debug("Runtime : %.2f seconds" % (time.time() - temps_debut))
 
