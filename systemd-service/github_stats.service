@@ -1,5 +1,5 @@
 [Unit]
-Description=bot github
+Description=github_stats.service
 
 [Service]
 Type=oneshot
