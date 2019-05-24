@@ -2,11 +2,12 @@
 
 Extract statistics from github repos to a csv file
 
-## Pre-requisites
+## Requirements
 
+- PyGithub
 - working github config.ini (see config_sample.ini)
 
-## Installation
+## Installation in a virtualenv
 
 ```
 pipenv install '-e .'
@@ -15,7 +16,19 @@ pipenv install '-e .'
 ## Help
 
 ```
-pipenv run github_stats -h
+github_stats -h
+```
+
+```
+usage: github_stats [-h] [--debug] [-f FILE]
+
+Script extracting statistics from github repos
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --debug               Display debugging information
+  -f FILE, --file FILE  File containing the repos (default : sample file
+                        containing popular repos)
 ```
 
 ## Usage
@@ -30,7 +43,7 @@ tensorflow/tensorflow
 You can then call
 
 ```
-pipenv run github_stats -f repos_list.txt
+github_stats -f repos_list.txt
 ```
 
 ## Autostarting

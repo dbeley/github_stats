@@ -5,6 +5,6 @@
 extract statistics from github repos
 """
 
-__version__ = "0.0.1"
+__version__ = "1.0"
 
 name = "github_stats"

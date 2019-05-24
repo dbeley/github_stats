@@ -5,5 +5,5 @@ dist/
 .venv/
 github_stats/__pycache__/
 config.ini
-*.txt
 tags
+/repos_list.txt
